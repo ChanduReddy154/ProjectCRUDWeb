@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Student } from '../Models/api-models/ui-models/student.model';
 import { StudentService } from './student.service';
 
 @Component({
@@ -7,6 +8,7 @@ import { StudentService } from './student.service';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  students : Student[] = []
 
   constructor(private studentService : StudentService) { }
 
@@ -16,7 +18,7 @@ export class StudentsComponent implements OnInit {
     this.studentService.getStudents()
     .subscribe(
       (successResponse) => {
-        console.log(successResponse);
+       this.students = successResponse
       },
       (errorResponse) => {
         console.log(errorResponse);
