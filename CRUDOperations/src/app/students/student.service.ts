@@ -15,6 +15,7 @@ export class StudentService {
 
 
   private baseApiUrl = 'http://localhost:65413/api/Student';
+  private baseApiUrl1 = 'http://localhost:65413';
   constructor(private httpClient : HttpClient) { }
 
   deleteStudent(studentId : string) : Observable<Student> {
@@ -60,6 +61,18 @@ export class StudentService {
       postalAddress : studentRequest.address.postalAddress
     };
     return this.httpClient.post<Student>(this.baseApiUrl + '/AddStudent', addStudentRequest);
+  }
+
+  uploadImage(studentId : string, file : File) : Observable<any> {
+    const formData = new FormData();
+    formData.append("profileImage",file);
+   return this.httpClient.post(this.baseApiUrl + '/' + studentId + '/upload-image', formData, {
+      responseType : 'text'
+    });
+  }
+
+  getImagePath(relativePath : string) {
+    return `${this.baseApiUrl1}/${relativePath}`;
   }
 
 
