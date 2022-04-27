@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AddStudentRequest } from '../Models/api-models/add-student-requesr.model';
 import { Gender } from '../Models/api-models/gender.model';
 import { Student } from '../Models/api-models/student.model';
@@ -14,8 +15,8 @@ import { UpdateStudentRequest } from '../Models/api-models/update-student-reques
 export class StudentService {
 
 
-  private baseApiUrl = 'http://localhost:65413/api/Student';
-  private baseApiUrl1 = 'http://localhost:65413';
+  private baseApiUrl = environment.baseApiUrl;
+  private baseApiUrl1 = environment.baseApiUrl1;
   constructor(private httpClient : HttpClient) { }
 
   deleteStudent(studentId : string) : Observable<Student> {
